@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>Invitation</title>
+<style>
+:root{--bg:#050505;--white:#f4f1e9;--muted:#858580;--pink:#ed1b76;--pink2:#ff2f8b}
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:var(--bg);color:var(--white);overflow:hidden}
+body{display:grid;place-items:center;font-family:Arial,Helvetica,sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background:
+linear-gradient(rgba(255,255,255,.015) 50%,transparent 50%);background-size:100% 4px}
+#stage{width:min(92vw,720px);min-height:65vh;display:grid;place-items:center;text-align:center;padding:28px;position:relative}
+.scene{grid-area:1/1;width:100%;opacity:0;filter:blur(6px);transform:scale(.985);
+transition:opacity 1.25s ease,filter 1.3s ease,transform 1.3s ease;pointer-events:none}
+.scene.show{opacity:1;filter:blur(0);transform:scale(1)}
+.scene.leave{opacity:0;filter:blur(4px);transform:scale(1.012)}
+.symbols{display:flex;justify-content:center;align-items:center;gap:clamp(22px,7vw,55px);margin:auto}
+.shape{display:inline-block;width:clamp(64px,18vw,112px);height:clamp(64px,18vw,112px);position:relative}
+.circle{border:clamp(5px,1.5vw,9px) solid var(--pink);border-radius:50%}
+.square{border:clamp(5px,1.5vw,9px) solid var(--pink)}
+.triangle:before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:0;height:0;
+border-left:clamp(37px,10vw,64px) solid transparent;border-right:clamp(37px,10vw,64px) solid transparent;
+border-bottom:clamp(64px,17.3vw,111px) solid var(--pink)}
+.triangle:after{content:"";position:absolute;left:50%;top:clamp(10px,2.6vw,16px);transform:translateX(-50%);width:0;height:0;
+border-left:clamp(28px,7.7vw,49px) solid transparent;border-right:clamp(28px,7.7vw,49px) solid transparent;
+border-bottom:clamp(48px,13.1vw,83px) solid var(--bg)}
+.label{font-size:clamp(11px,2.7vw,14px);letter-spacing:.34em;color:var(--muted);margin-bottom:20px}
+.title{font-size:clamp(29px,8vw,58px);font-weight:800;letter-spacing:.09em}
+.pink{color:var(--pink)}
+.number{font-variant-numeric:tabular-nums;font-size:clamp(88px,27vw,185px);font-weight:800;line-height:.9;letter-spacing:.055em}
+.sub{font-size:clamp(11px,3vw,16px);letter-spacing:.25em;color:var(--muted);margin-top:20px}
+.rule{width:0;height:2px;background:var(--pink);margin:25px auto;box-shadow:0 0 12px rgba(237,27,118,.45);transition:width 1.25s ease}.show .rule{width:76px}
+.korean{font-family:"Noto Sans KR","Malgun Gothic",Arial,sans-serif;font-size:clamp(17px,5vw,27px);letter-spacing:.12em;color:var(--pink);margin-top:30px}
+
+/* opening reveal */
+#s1.show .symbols{animation:resolve 2.5s ease both}
+@keyframes resolve{0%{opacity:0;filter:blur(10px);transform:scale(.88)}45%{opacity:.65}100%{opacity:1;filter:none;transform:scale(1)}}
+
+/* terminal cursor */
+.cursor:after{content:"";display:inline-block;width:.55em;height:.08em;background:var(--pink);margin-left:.2em;vertical-align:.12em;animation:blink .75s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* scan line */
+.scan{position:absolute;left:10%;right:10%;height:2px;top:29%;opacity:0;background:linear-gradient(90deg,transparent,var(--pink2),transparent);box-shadow:0 0 18px rgba(237,27,118,.55)}
+#s3.show .scan{animation:scan 3.1s ease-in-out .3s 1}
+@keyframes scan{0%{opacity:0;transform:translateY(-50px)}20%{opacity:.75}80%{opacity:.5}100%{opacity:0;transform:translateY(145px)}}
+
+/* 005 -> 006 registration event */
+#s4.show .number{animation:accept 1.55s ease both}
+@keyframes accept{
+0%{opacity:0;transform:scale(.94);filter:blur(7px)}
+35%{opacity:1;filter:none}
+48%{transform:translateX(-4px);text-shadow:8px 0 rgba(237,27,118,.35)}
+53%{transform:translateX(4px);text-shadow:-8px 0 rgba(237,27,118,.35)}
+60%{transform:none;text-shadow:0 0 32px rgba(237,27,118,.7)}
+100%{transform:none;text-shadow:0 0 15px rgba(237,27,118,.25)}
+}
+#s4.show:before,#s4.show:after{content:"";position:absolute;left:15%;right:15%;height:1px;background:var(--pink);opacity:0}
+#s4.show:before{top:42%;animation:glitchline .65s ease .6s}
+#s4.show:after{top:58%;animation:glitchline .55s ease .78s}
+@keyframes glitchline{0%,100%{opacity:0;transform:scaleX(.3)}50%{opacity:.75;transform:scaleX(1)}}
+
+/* final */
+.finalshapes{transform:scale(.55);margin-bottom:8px}
+#s6.show .finalshapes{animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.7}50%{opacity:1}}
+#reset{position:fixed;right:7px;bottom:7px;border:0;background:transparent;color:#151515;padding:13px;font-size:12px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main id="stage" aria-live="polite">
+<section class="scene" id="s1">
+  <div class="symbols"><span class="shape circle"></span><span class="shape triangle"></span><span class="shape square"></span></div>
+</section>
+
+<section class="scene" id="s2">
+  <div class="label">INVITATION RECEIVED</div>
+  <div class="title cursor">VIP <span class="pink">007</span></div>
+  <div class="sub">AUTHORISED</div>
+</section>
+
+<section class="scene" id="s3">
+  <div class="scan"></div>
+  <div class="label">PLAYERS REGISTERED</div>
+  <div class="number" id="before">005</div>
+  <div class="sub">PROCESSING INVITATION</div>
+</section>
+
+<section class="scene" id="s4">
+  <div class="label pink">PLAYER ACCEPTED</div>
+  <div class="number pink" id="after">006</div>
+</section>
+
+<section class="scene" id="s5">
+  <div class="label">REGISTRATION COMPLETE</div>
+  <div class="title">PLAYER <span class="pink" id="player">006</span></div>
+  <div class="rule"></div>
+  <div class="sub">INVITED BY VIP 007</div>
+</section>
+
+<section class="scene" id="s6">
+  <div class="symbols finalshapes"><span class="shape circle"></span><span class="shape triangle"></span><span class="shape square"></span></div>
+  <div class="title" style="font-size:clamp(23px,6.4vw,44px)">THE GAME WILL<br>BEGIN SHORTLY</div>
+  <div class="rule"></div>
+  <div class="sub">PLAYER <span id="playerFinal">006</span></div>
+  <div class="korean">무궁화 꽃이 피었습니다</div>
+</section>
+</main>
+<button id="reset" aria-label="Reset invitation">•</button>
+<script>
+(()=>{
+ const KEY="vip007_player",pool=[2,3,4,5,6,8,9,10,11,12];
+ let n=Number(localStorage.getItem(KEY));
+ if(!pool.includes(n)){n=pool[Math.floor(Math.random()*pool.length)];localStorage.setItem(KEY,String(n))}
+ const f=x=>String(x).padStart(3,"0");
+ before.textContent=f(Math.max(1,n-1)); after.textContent=f(n); player.textContent=f(n); playerFinal.textContent=f(n);
+ const scenes=["s1","s2","s3","s4","s5","s6"].map(x=>document.getElementById(x));
+ const holds=[3300,3500,4300,3400,4300,999999],fade=1050,sleep=ms=>new Promise(r=>setTimeout(r,ms));
+ async function play(){for(let i=0;i<scenes.length;i++){scenes.forEach(s=>s.classList.remove("show","leave"));scenes[i].classList.add("show");await sleep(holds[i]);if(i<scenes.length-1){scenes[i].classList.add("leave");await sleep(fade)}}}
+ setTimeout(play,650);
+ reset.onclick=()=>{localStorage.removeItem(KEY);location.reload()}
+})();
+</script>
+</body></html>
